@@ -8,7 +8,10 @@ require (
 )
 
 require (
+	github.com/golang/protobuf v1.5.2 // indirect
+	github.com/joonix/log v0.0.0-20230221083239-7988383bab32 // indirect
 	go.uber.org/multierr v1.10.0 // indirect
-	golang.org/x/sys v0.0.0-20220715151400-c0bba94af5f8 // indirect
+	golang.org/x/sys v0.5.0 // indirect
+	google.golang.org/genproto v0.0.0-20230216225411-c8e22ba71e44 // indirect
 	google.golang.org/protobuf v1.34.2 // indirect
 )
