@@ -25,5 +25,4 @@ func LoggerZero() {
 
 	logZero.Error("go-zero-log: level Error")
 	logZero.Errorf("go-zero-log: level Errorf %s", "string data")
-
 }

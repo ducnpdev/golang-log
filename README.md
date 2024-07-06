@@ -20,6 +20,38 @@ https://github.com/zeromicro/go-zero
 - AddGlobalFields: cực kỳ phù hợp với những api, chức năng có độ phức tạp cao, sẽ note chi tiết trong phần sau.
 
 #### Ví dụ:
+1. Code:
+```go
+package zlogger
+
+import (
+	logZero "github.com/zeromicro/go-zero/core/logx"
+)
+
+func LoggerZero() {
+	logZero.Info("go-zero-log: level Info")
+	logZero.Infof("go-zero-log: level Infof %s", "string data")
+	type JsonValue struct {
+		Name  string `json:"name"`
+		Value string `json:"value"`
+	}
+	var jsonExam = JsonValue{Name: "111", Value: "222"}
+	logZero.Infov(jsonExam)
+
+	logZero.Infow("go-zero-log: level infow", logZero.LogField{
+		Key: "key", Value: "abc",
+	})
+
+	logZero.AddGlobalFields(logZero.LogField{Key: "key", Value: "abc"})
+
+	logZero.Debug("go-zero-log: level Debug")
+	logZero.Debugf("go-zero-log: level Debugf %s", "string data")
+
+	logZero.Error("go-zero-log: level Error")
+	logZero.Errorf("go-zero-log: level Errorf %s", "string data")
+}
+```
+2. Log
 ```log
 {"@timestamp":"2024-07-06T18:07:42.649+07:00","caller":"gozero/zero.go:8","content":"go-zero-log: level Info","level":"info"}
 {"@timestamp":"2024-07-06T18:07:42.649+07:00","caller":"gozero/zero.go:9","content":"go-zero-log: level Infof string data","level":"info"}

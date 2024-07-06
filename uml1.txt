@@ -1,0 +1,21 @@
+@startuml
+
+start
+
+:FollowLogic1;
+:usecase1;
+:adapter1;
+
+if (Condition) then (true)
+  :FollowLogic2;
+  :usecase2;
+  :adapter2;
+else (false)
+  :FollowLogic3;
+  :usecase3;
+  :adapter3;
+endif
+
+:End;
+
+@enduml
