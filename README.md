@@ -6,6 +6,31 @@ https://github.com/uber-go/zap
 ## log with library logrus
 https://github.com/sirupsen/logrus
 
+## log with library gozero
+https://github.com/zeromicro/go-zero
+
+### một vài điểm khác biệt
+- level: `gozero` chỉ có 4 level: `debug`, `info`, `error`, `Severe`
+  - khác với `zap`, `logrus`, thì không có level `WarnLevel`
+- Với 1 level thì có 1 func:
+  - Info: input là string
+  - Infof: input là string và %s
+  - Infov: input có thể là 1 struct, kiểu json
+  - Infow: input là string và log field
+- AddGlobalFields: cực kỳ phù hợp với những api, chức năng có độ phức tạp cao, sẽ note chi tiết trong phần sau.
+
+#### Ví dụ:
+```log
+{"@timestamp":"2024-07-06T18:07:42.649+07:00","caller":"gozero/zero.go:8","content":"go-zero-log: level Info","level":"info"}
+{"@timestamp":"2024-07-06T18:07:42.649+07:00","caller":"gozero/zero.go:9","content":"go-zero-log: level Infof string data","level":"info"}
+{"@timestamp":"2024-07-06T18:07:42.649+07:00","caller":"gozero/zero.go:15","content":{"name":"111","value":"222"},"level":"info"}
+{"@timestamp":"2024-07-06T18:07:42.649+07:00","caller":"gozero/zero.go:17","content":"go-zero-log: level infow","key":"abc","level":"info"}
+{"@timestamp":"2024-07-06T18:07:42.649+07:00","caller":"gozero/zero.go:23","content":"go-zero-log: level Debug","key":"abc","level":"debug"}
+{"@timestamp":"2024-07-06T18:07:42.649+07:00","caller":"gozero/zero.go:24","content":"go-zero-log: level Debugf string data","key":"abc","level":"debug"}
+{"@timestamp":"2024-07-06T18:07:42.649+07:00","caller":"gozero/zero.go:26","content":"go-zero-log: level Error","key":"abc","level":"error"}
+{"@timestamp":"2024-07-06T18:07:42.649+07:00","caller":"gozero/zero.go:27","content":"go-zero-log: level Errorf string data","key":"abc","level":"error"}
+```
+
 ## example
 - run `go run main.go`
 ```go
@@ -26,9 +51,6 @@ func main() {
 	fmt.Println("main")
 	lrus := loggerRus.New()
 	lrus.Debugf("xin chao logrus")
-
-	lzap := loggerZap.NewLogger("", "", "", "")
-	lzap.Debugf("xin chao")
 }
 ```
 - output:
@@ -43,3 +65,6 @@ func main() {
     {"LEVEL":"info","TIME":"2024-06-16T10:07:45.818+0700","CALLER":"golang-log/main.go:25","MESSAGE":"zap: log info"}
     {"LEVEL":"warn","TIME":"2024-06-16T10:07:45.818+0700","CALLER":"golang-log/main.go:26","MESSAGE":"zap: log warn"}
     ```
+
+## add log with context
+### integration with logrus
